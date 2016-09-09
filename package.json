@@ -1,14 +1,14 @@
 {
-  "name": "react-testing",
+  "name": "react-todo",
   "version": "1.0.0",
-  "description": "a simple skeleton react redux app",
+  "description": "A simple REACT TODO app",
   "main": "index.js",
   "scripts": {
     "start": "node index"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:junxianlim/react-redux-skeleton.git"
+    "url": "git@gitlab.com:junxianlim/react-todo.git"
   },
   "author": "lim jun xian",
   "license": "ISC",
