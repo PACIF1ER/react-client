@@ -4,25 +4,21 @@ import { logoutUser } from '../actions/index';
 import { connect } from 'react-redux';
 
 function Main({logoutUser, authenticated}) {
-  function loginButton() {
+
+  function renderButtons() {
     if (authenticated) {
       return (
-        <button className="btn btn-info" onClick={() => logoutUser()}>Logout</button>
+        <div>
+          <Link to="/dashboard" className="btn btn-primary">Dashboard</Link>
+          <button className="btn btn-info" onClick={() => logoutUser()}>Logout</button>
+        </div>
       )
     }
-
     return (
-      <Link to="/login" className="btn btn-success"> Login </Link>
-    )
-  }
-
-  function registerButton() {
-    if (authenticated) {
-      return null
-    }
-
-    return (
-      <Link to="/register" className="btn btn-primary">Register </Link>
+      <div>
+        <Link to="/register" className="btn btn-primary">Register</Link>
+        <Link to="/login" className="btn btn-success">Login</Link>
+      </div>
     )
   }
 
@@ -30,8 +26,7 @@ function Main({logoutUser, authenticated}) {
     <div className="full-page">
       <div className="content text-center">
         <h1> Hipster TODO </h1>
-        {registerButton()}
-        {loginButton()}
+        {renderButtons()}
       </div>
     </div>
   )

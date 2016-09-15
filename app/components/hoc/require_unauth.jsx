@@ -13,15 +13,8 @@ export default function(ComposedComponent) {
       }
     }
 
-    componentWillUpdate(nextProps) {
-      if (nextProps.authenticated) {
-      }
-    }
-
     render() {
-      return (
-        <ComposedComponent {...this.props} />
-      )
+      return <ComposedComponent {...this.props} />
     }
   }
 

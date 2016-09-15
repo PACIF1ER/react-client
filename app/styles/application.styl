@@ -8,8 +8,40 @@
   height 100vh
   flex-wrap wrap
 
+.alert
+  position absolute
+  top 0
+  width 100%
+
 .content
   width 400px
 
+.content-lg
+  width 600px
+
 .btn
-  margin 10px
+  margin 5px
+
+.tasks
+  display flex
+  justify-content center
+  flex-wrap wrap
+
+  .task
+    flex 0 0 100%
+    display flex
+    align-items center
+    border 1px solid black
+
+    p
+      margin 0
+
+    .description
+      flex 3 0
+      margin 5px
+
+    .complete-btn
+      flex 1 0
+
+    .delete-btn
+      flex 0 0 50px

@@ -7,6 +7,10 @@ const SET_FLASH_MESSAGE = 'SET_FLASH_MESSAGE';
 const HIDE_FLASH_MESSAGE = 'HIDE_FLASH_MESSAGE';
 const AUTH_ERROR = 'AUTH_ERROR';
 const LOGOUT_USER = 'LOGOUT_USER';
+const FETCH_TASKS = 'FETCH_TASKS';
+const DELETE_TASK = 'DELETE_TASK';
+const MARK_TASK = 'MARK_TASK';
+const CREATE_TASK = 'CREATE_TASK';
 
 const ROOT_URL = "http://localhost:3000/api/v1";
 
@@ -74,4 +78,67 @@ export function logoutUser() {
     dispatch({ type: LOGOUT_USER, payload: false });
     dispatch(setFlashMessage("Logged out", "success"))
   }
+}
+
+export function fetchTasks() {
+  return function(dispatch) {
+    const URL = `${ROOT_URL}/tasks`
+    const headers = {
+      Authorization: localStorage.auth_token
+    }
+    axios.get(URL, { headers: headers })
+    .then(response => {
+      dispatch({ type: FETCH_TASKS, payload: response })
+    })
+    .catch(error => {
+      dispatch(setFlashMessage("Error retrieving tasks", "danger"))
+    })
+  }
+}
+
+export function markComplete(taskId) {
+  return function(dispatch) {
+    const URL = `${ROOT_URL}/tasks/${taskId}/complete`
+    const params = {
+      method: 'POST',
+      url: URL,
+      headers: {
+        Authorization: localStorage.auth_token
+      }
+    }
+    axios(params)
+    .then(response => {
+      const status = response.data.complete ? "complete" : "incomplete"
+      dispatch(setFlashMessage(`Task marked as ${status}`, "success"))
+      dispatch({ type: MARK_TASK, payload: response.data })
+    })
+    .catch(error => {
+      dispatch(setFlashMessage("Error marking task", "danger"))
+    })
+  }
+}
+
+export function deleteTask(taskId) {
+  return function(dispatch) {
+    const URL = `${ROOT_URL}/tasks/${taskId}`
+    const params = {
+      method: 'DELETE',
+      url: URL,
+      headers: {
+        Authorization: localStorage.auth_token
+      }
+    }
+    axios(params)
+    .then(response => {
+      dispatch(setFlashMessage("Task deleted", "success"))
+      dispatch({ type: DELETE_TASK, payload: response.data })
+    })
+    .catch(error => {
+      dispatch(setFlashMessage("Error deleting task", "danger"))
+    })
+  }
+}
+
+export function createTask() {
+
 }
