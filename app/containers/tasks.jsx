@@ -5,7 +5,9 @@ import Task from '../components/task.jsx';
 
 class Tasks extends Component {
   componentWillMount() {
-    this.props.fetchTasks();
+    if (this.props.authenticated) {
+      this.props.fetchTasks();
+    }
   }
 
   renderTasks() {
@@ -35,6 +37,7 @@ class Tasks extends Component {
 
 function mapStateToProps(state) {
   return {
+    authenticated: state.authenticated,
     tasks: state.tasks.all
   }
 }

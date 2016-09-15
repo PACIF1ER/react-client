@@ -10,9 +10,6 @@ function Dashboard() {
       <div className="content-lg">
         <Tasks />
         <CreateTaskForm />
-        <div className="text-center">
-          <Link to="/" className="btn btn-success">Home</Link>
-        </div>
       </div>
     </div>
   )

@@ -1,5 +1,17 @@
 import React from 'react';
 
+export function descriptionInput(description) {
+  return (
+    <div className={`form-group ${description.meta.touched && description.meta.invalid ? 'text-danger' : ''}`}>
+      <label> Task </label>
+      <input type="text" {...description.input} className="form-control" placeholder="Task"/>
+      <div className="text-helper">
+        {description.meta.touched ? description.meta.error : ''}
+      </div>
+    </div>
+  )
+}
+
 export function emailInput(email) {
   return (
     <div className={`form-group ${email.meta.touched && email.meta.invalid ? 'text-danger' : ''}`}>

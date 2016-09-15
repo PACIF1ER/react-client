@@ -139,6 +139,28 @@ export function deleteTask(taskId) {
   }
 }
 
-export function createTask() {
+export function createTask(task) {
+  return function(dispatch) {
+    const URL = `${ROOT_URL}/tasks`
+    const params = {
+      method: 'POST',
+      url: URL,
+      headers: {
+        Authorization: localStorage.auth_token
+      },
+      data: {
+        task,
+        format: 'json'
+      }
+    }
 
+    axios(params)
+    .then(response => {
+      dispatch(setFlashMessage("Task created", "success"))
+      dispatch({ type: CREATE_TASK, payload: response.data})
+    })
+    .catch(error => {
+      dispatch(setFlashMessage(error.response.data.message, "danger"))
+    })
+  }
 }

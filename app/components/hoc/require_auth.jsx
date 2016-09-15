@@ -10,7 +10,7 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.authenticated) {
-        setFlashMessage("Please login first", "primary")
+        this.props.setFlashMessage("Please login first", "warning")
         this.context.router.push("/")
       }
     }
@@ -32,5 +32,5 @@ export default function(ComposedComponent) {
     }
   }
 
-  return connect(mapStateToProps)(Authentication);
+  return connect(mapStateToProps, { setFlashMessage })(Authentication);
 }
