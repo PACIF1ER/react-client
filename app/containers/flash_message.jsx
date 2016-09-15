@@ -18,7 +18,7 @@ function FlashMessage({ flashMessage, flashKey, flashVisible, hideFlashMessage }
         </ul>
       )
     } else {
-      return <strong>message</strong>
+      return <strong>{message}</strong>
     }
   }
 

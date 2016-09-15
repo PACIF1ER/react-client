@@ -24,6 +24,18 @@ export function passwordInput(password) {
   )
 }
 
+export function passwordConfirmationInput(password_confirmation) {
+  return (
+    <div className={`form-group ${password_confirmation.meta.touched && password_confirmation.meta.invalid ? 'text-danger' : ''}`}>
+      <label> Password </label>
+      <input type="password" {...password_confirmation.input} className="form-control" placeholder="Password Confirmation"/>
+      <div className="text-helper">
+        {password_confirmation.meta.touched ? password_confirmation.meta.error : ''}
+      </div>
+    </div>
+  )
+}
+
 export function firstNameInput(first_name) {
   return (
     <div className={`form-group ${first_name.meta.touched && first_name.meta.invalid ? 'text-danger' : ''}`}>

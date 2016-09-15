@@ -1,34 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { emailInput, passwordInput, firstNameInput, lastNameInput } from './form_inputs/index.jsx';
+import { emailInput, passwordInput, passwordConfirmationInput, firstNameInput, lastNameInput } from './form_inputs/index.jsx';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { registerUser, setFlashMessage } from '../actions/index';
+import { registerUser } from '../actions/index';
 
 class RegisterForm extends Component {
   static contextTypes = {
     router: PropTypes.object
   }
 
-  evaluateMessage(message) {
-    if (message[0] === "[") {
-      return eval(message)
-    } else {
-      return message
-    }
-  }
-
   onSubmit(props) {
-    this.props.registerUser(props).then(function(response) {
-      if (response.error) {
-        let message = this.evaluateMessage(response.payload.response.data.message)
-        this.props.setFlashMessage(message, "danger")
-      } else {
-        debugger
-        console.log(window.localStorage)
-        console.log(response)
-      }
-    }.bind(this))
+    this.props.registerUser(props)
   }
 
   render() {
@@ -39,6 +22,7 @@ class RegisterForm extends Component {
             <h3> Register User </h3>
             <Field name="email" component={emailInput} />
             <Field name="password" component={passwordInput} />
+            <Field name="password_confirmation" component={passwordConfirmationInput} />
             <Field name="first_name" component={firstNameInput} />
             <Field name="last_name" component={lastNameInput} />
             <div className="form-group">
@@ -54,7 +38,7 @@ class RegisterForm extends Component {
 
 function validate(values) {
   const errors = {};
-  const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/
+  const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm
 
   if (!values.email) {
     errors.email = "Add an email"
@@ -70,6 +54,10 @@ function validate(values) {
 
   if (values.password && values.password.length < 8) {
     errors.password = "Password needs to be at least 8 characters"
+  }
+
+  if (values.password != values.password_confirmation) {
+    errors.password_confirmation = "Password confirmation does not match password"
   }
 
   if (!values.first_name) {
@@ -89,4 +77,4 @@ const RegisterUserReduxForm = reduxForm({
   validate
 })(RegisterForm);
 
-export default connect(null, { registerUser, setFlashMessage })(RegisterUserReduxForm)
+export default connect(null, { registerUser })(RegisterUserReduxForm)
