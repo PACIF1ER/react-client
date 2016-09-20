@@ -4,10 +4,6 @@ import { Router } from '../../routes';
 
 export default function(ComposedComponent) {
   class Unauthentication extends Component {
-    static contextTypes = {
-      router: PropTypes.object
-    }
-
     componentWillMount() {
       if (this.props.authenticated) {
         Router.stateService.go('main')
