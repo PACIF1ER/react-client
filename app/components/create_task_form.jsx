@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createTask } from '../actions/index';
 import { descriptionInput } from './form_inputs/index.jsx';
-import { Link } from 'react-router';
+import { UISref } from 'ui-router-react';
 
 function CreateTaskForm({handleSubmit, createTask}) {
-  
+
   function onSubmit(props) {
     createTask(props)
   }
@@ -17,7 +17,7 @@ function CreateTaskForm({handleSubmit, createTask}) {
       <Field name="description" component={descriptionInput} />
       <div className="form-group text-center">
         <button type="submit" className="btn btn-primary"> Create Task </button>
-        <Link to="/" className="btn btn-success">Home</Link>
+        <UISref to="main"><a className="btn btn-success">Home</a></UISref>
       </div>
     </form>
   )

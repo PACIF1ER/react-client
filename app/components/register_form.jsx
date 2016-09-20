@@ -1,39 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { emailInput, passwordInput, passwordConfirmationInput, firstNameInput, lastNameInput } from './form_inputs/index.jsx';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/index';
+import { UISref } from 'ui-router-react';
 
-class RegisterForm extends Component {
-  static contextTypes = {
-    router: PropTypes.object
+function RegisterForm({handleSubmit, registerUser}) {
+  function onSubmit(props) {
+    registerUser(props)
   }
 
-  onSubmit(props) {
-    this.props.registerUser(props)
-  }
-
-  render() {
-    return (
-      <div className="full-page">
-        <div className="content">
-          <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-            <h3> Register User </h3>
-            <Field name="email" component={emailInput} />
-            <Field name="password" component={passwordInput} />
-            <Field name="password_confirmation" component={passwordConfirmationInput} />
-            <Field name="first_name" component={firstNameInput} />
-            <Field name="last_name" component={lastNameInput} />
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary"> Register </button>
-              <Link to="/" className="btn btn-success">Home</Link>
-            </div>
-          </form>
-        </div>
+  return (
+    <div className="full-page">
+      <div className="content">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h3> Register User </h3>
+          <Field name="email" component={emailInput} />
+          <Field name="password" component={passwordInput} />
+          <Field name="password_confirmation" component={passwordConfirmationInput} />
+          <Field name="first_name" component={firstNameInput} />
+          <Field name="last_name" component={lastNameInput} />
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary"> Register </button>
+            <UISref to="main"><a className="btn btn-success">Home</a></UISref>
+          </div>
+        </form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 function validate(values) {

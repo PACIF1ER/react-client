@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Router } from '../../routes';
 
 export default function(ComposedComponent) {
   class Unauthentication extends Component {
@@ -9,7 +10,7 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (this.props.authenticated) {
-        this.context.router.push("/")
+        Router.stateService.go('main')
       }
     }
 

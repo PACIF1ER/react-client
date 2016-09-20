@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { loginUser } from '../actions/index';
 import { emailInput, passwordInput } from './form_inputs/index.jsx';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
+import { UISref } from 'ui-router-react';
 
-class LoginForm extends Component {
-
-  onSubmit(props) {
-    this.props.loginUser(props)
+function LoginForm({loginUser, handleSubmit}) {
+  function onSubmit(props) {
+    loginUser(props)
   }
 
-  render() {
-    return (
-      <div className="full-page">
-        <div className="content">
-          <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-            <h3>Login User</h3>
-            <Field name="email" component={emailInput} />
-            <Field name="password" component={passwordInput} />
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary"> Login </button>
-              <Link to="/" className="btn btn-success">Home</Link>
-            </div>
-          </form>
-        </div>
+  return (
+    <div className="full-page">
+      <div className="content">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h3>Login User</h3>
+          <Field name="email" component={emailInput} />
+          <Field name="password" component={passwordInput} />
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary"> Login </button>
+            <UISref to="main"><a className="btn btn-success">Home</a></UISref>
+          </div>
+        </form>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 function validate(values) {

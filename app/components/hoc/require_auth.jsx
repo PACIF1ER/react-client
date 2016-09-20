@@ -1,23 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setFlashMessage } from '../../actions/index';
+import { Router } from '../../routes';
 
 export default function(ComposedComponent) {
   class Authentication extends Component {
-    static contextTypes = {
-      router: PropTypes.object
-    }
 
     componentWillMount() {
       if (!this.props.authenticated) {
         this.props.setFlashMessage("Please login first", "warning")
-        this.context.router.push("/")
+        Router.stateService.go('main')
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.content.router.push("/")
+        Router.stateService.go('main')
       }
     }
 

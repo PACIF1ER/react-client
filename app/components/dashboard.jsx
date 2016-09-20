@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import Tasks from '../containers/tasks.jsx';
 import CreateTaskForm from './create_task_form.jsx';
 

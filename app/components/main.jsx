@@ -1,23 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { logoutUser } from '../actions/index';
 import { connect } from 'react-redux';
-
+import { UISref } from 'ui-router-react';
 function Main({logoutUser, authenticated}) {
 
   function renderButtons() {
     if (authenticated) {
       return (
         <div>
-          <Link to="/dashboard" className="btn btn-primary">Dashboard</Link>
+          <UISref to="dashboard"><a className="btn btn-primary">Dashboard</a></UISref>
           <button className="btn btn-info" onClick={() => logoutUser()}>Logout</button>
         </div>
       )
     }
     return (
       <div>
-        <Link to="/register" className="btn btn-primary">Register</Link>
-        <Link to="/login" className="btn btn-success">Login</Link>
+        <UISref to="register"><a className="btn btn-primary">Register</a></UISref>
+        <UISref to="login"><a className="btn btn-success">Login</a></UISref>
       </div>
     )
   }

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
-
+import { Router } from '../routes';
 const REGISTER_USER = 'REGISTER_USER';
 const LOGIN_USER = 'LOGIN_USER';
 const SET_FLASH_MESSAGE = 'SET_FLASH_MESSAGE';
@@ -38,7 +37,7 @@ export function registerUser(user) {
     axios.post(URL, params)
     .then(response => {
       localStorage.setItem('auth_token', response.data.auth_token);
-      browserHistory.push('/')
+      Router.stateService.go('main')
       dispatch({ type: REGISTER_USER, payload: true })
       dispatch(setFlashMessage(response.data.message, "success"))
     })
@@ -62,7 +61,7 @@ export function loginUser(user) {
     axios.post(URL, params)
     .then(response => {
       localStorage.setItem('auth_token', response.data.auth_token);
-      browserHistory.push('/')
+      Router.stateService.go('main')
       dispatch({ type: LOGIN_USER, payload: true });
       dispatch(setFlashMessage("Login successful", "success"))
     })
