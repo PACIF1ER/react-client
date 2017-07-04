@@ -3,6 +3,7 @@ const FETCH_TASKS = 'FETCH_TASKS';
 const MARK_TASK = 'MARK_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 const CREATE_TASK = 'CREATE_TASK';
+const UPDATE_TASK = 'UPDATE_TASK'
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
@@ -18,6 +19,13 @@ export default function(state = INITIAL_STATE, action) {
       return todo.id === action.payload.id ? { ...todo, complete: action.payload.complete } : todo
     })
     return { ...state, all: tasks };
+  }
+  case UPDATE_TASK: {
+    let tasks = state.all.filter(todo => {
+      return todo.id != action.payload.id
+    })
+    return { ...state, all: tasks };
+    
   }
   case DELETE_TASK: {
     let tasks = state.all.filter(todo => {

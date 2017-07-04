@@ -24,7 +24,7 @@ function Main({logoutUser, authenticated}) {
   return (
     <div className="full-page">
       <div className="content text-center">
-        <h1> Hipster TODO </h1>
+        <h1> Todo app </h1>
         {renderButtons()}
       </div>
     </div>

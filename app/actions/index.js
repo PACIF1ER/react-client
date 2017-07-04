@@ -10,6 +10,7 @@ const FETCH_TASKS = 'FETCH_TASKS';
 const DELETE_TASK = 'DELETE_TASK';
 const MARK_TASK = 'MARK_TASK';
 const CREATE_TASK = 'CREATE_TASK';
+const UPDATE_TASK =  'UPDATE_TASK';
 
 const ROOT_URL = "http://localhost:3000/api/v1";
 
@@ -137,7 +138,26 @@ export function deleteTask(taskId) {
     })
   }
 }
-
+export function updateTask(taskId){
+  return function(dispatch){
+    const URL = `${ROOT_URL}/tasks/${taskId}`
+    const params = {
+      method: 'PUT',
+      url: URL,
+      headers: {
+        Authorization: localStorage.auth_token
+      }
+    }
+    axios(params)
+      .then(response => {
+        dispatch(setFlashMessage("Task updated", "success"))
+        dispatch({type: UPDATE_TASK, payload: response.data})
+      })
+    .catch(error => {
+      dispatch(setFlashMessage("Error updating task", "danger"))
+    })
+  }
+}
 export function createTask(task) {
   return function(dispatch) {
     const URL = `${ROOT_URL}/tasks`
