@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Tasks from '../containers/tasks.jsx';
-import CreateTaskForm from './create_task_form.jsx';
-
+import Todos from '../containers/Todos.js';
+import TextField from 'material-ui/TextField';
 function Dashboard() {
   return (
     <div className="full-page">
       <div className="content-lg">
-        <Tasks />
-        <CreateTaskForm />
+        <Todos />
       </div>
     </div>
   )

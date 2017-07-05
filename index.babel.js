@@ -5,6 +5,7 @@ import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+
 const compiler = webpack(config);
 const app = express();
 

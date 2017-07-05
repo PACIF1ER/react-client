@@ -6,11 +6,16 @@ const SET_FLASH_MESSAGE = 'SET_FLASH_MESSAGE';
 const HIDE_FLASH_MESSAGE = 'HIDE_FLASH_MESSAGE';
 const AUTH_ERROR = 'AUTH_ERROR';
 const LOGOUT_USER = 'LOGOUT_USER';
-const FETCH_TASKS = 'FETCH_TASKS';
-const DELETE_TASK = 'DELETE_TASK';
-const MARK_TASK = 'MARK_TASK';
-const CREATE_TASK = 'CREATE_TASK';
-const UPDATE_TASK =  'UPDATE_TASK';
+const FETCH_TODOS = 'FETCH_TODOS';
+const RECEIVE_TODOS = 'RECEIVE_TODOS';
+const ADD_TODO = 'ADD_TODO';
+const ADD_TODO_COMPLETE = 'ADD_TODO_COMPLETE';
+const EDIT_TODO = 'EDIT_TODO';
+const UPDATE_TODO= 'UPDATE_TODO';
+const DELETE_TODO = 'DELETE_TODO';
+const SELECT_TODO = 'SELECT_TODO';
+const SET_ALERT = 'SET_ALERT';
+const CANCEL_EDIT_TODO = 'CANCEL_EDIT_TODO';
 
 const ROOT_URL = "http://localhost:3000/api/v1";
 
@@ -79,7 +84,6 @@ export function logoutUser() {
     dispatch(setFlashMessage("Logged out", "success"))
   }
 }
-
 export function fetchTasks() {
   return function(dispatch) {
     const URL = `${ROOT_URL}/tasks`
@@ -88,7 +92,7 @@ export function fetchTasks() {
     }
     axios.get(URL, { headers: headers })
     .then(response => {
-      dispatch({ type: FETCH_TASKS, payload: response })
+      dispatch({ type: FETCH_TODOS, payload: response })
     })
     .catch(error => {
       dispatch(setFlashMessage("Error retrieving tasks", "danger"))
@@ -96,90 +100,60 @@ export function fetchTasks() {
   }
 }
 
-export function markComplete(taskId) {
-  return function(dispatch) {
-    const URL = `${ROOT_URL}/tasks/${taskId}/complete`
-    const params = {
-      method: 'POST',
-      url: URL,
-      headers: {
-        Authorization: localStorage.auth_token
-      }
-    }
-    axios(params)
-    .then(response => {
-      const status = response.data.complete ? "complete" : "incomplete"
-      dispatch(setFlashMessage(`Task marked as ${status}`, "success"))
-      dispatch({ type: MARK_TASK, payload: response.data })
-    })
-    .catch(error => {
-      dispatch(setFlashMessage("Error marking task", "danger"))
-    })
-  }
-}
+export const selectTodo = (todoId) => ({
+  type: SELECT_TODO,
+  todoId
+})
 
-export function deleteTask(taskId) {
-  return function(dispatch) {
-    const URL = `${ROOT_URL}/tasks/${taskId}`
-    const params = {
-      method: 'DELETE',
-      url: URL,
-      headers: {
-        Authorization: localStorage.auth_token
-      }
-    }
-    axios(params)
-    .then(response => {
-      dispatch(setFlashMessage("Task deleted", "success"))
-      dispatch({ type: DELETE_TASK, payload: response.data })
-    })
-    .catch(error => {
-      dispatch(setFlashMessage("Error deleting task", "danger"))
-    })
-  }
+export const addTodo = (body) => {
+  return (dispatch) => {
+             const headers = {
+      Authorization: localStorage.auth_token
 }
-export function updateTask(taskId){
-  return function(dispatch){
-    const URL = `${ROOT_URL}/tasks/${taskId}`
-    const params = {
-      method: 'PUT',
-      url: URL,
-      headers: {
-        Authorization: localStorage.auth_token
-      }
-    }
-    axios(params)
-      .then(response => {
-        dispatch(setFlashMessage("Task updated", "success"))
-        dispatch({type: UPDATE_TASK, payload: response.data})
+    dispatch({type: ADD_TODO})
+    axios.post('http://localhost:3000/api/v1/tasks', { headers}, {todo: {body}})
+    .then(res => {
+      dispatch({
+        type: ADD_TODO_COMPLETE,
+        todo: res.data
       })
-    .catch(error => {
-      dispatch(setFlashMessage("Error updating task", "danger"))
     })
   }
 }
-export function createTask(task) {
-  return function(dispatch) {
-    const URL = `${ROOT_URL}/tasks`
-    const params = {
-      method: 'POST',
-      url: URL,
-      headers: {
-        Authorization: localStorage.auth_token
-      },
-      data: {
-        task,
-        format: 'json'
-      }
-    }
 
-    axios(params)
-    .then(response => {
-      dispatch(setFlashMessage("Task created", "success"))
-      dispatch({ type: CREATE_TASK, payload: response.data})
-    })
-    .catch(error => {
-      dispatch(setFlashMessage(error.response.data.message, "danger"))
+//TODO api揃える！！
+export const editTodo = (todo) => ({
+  type: EDIT_TODO,
+  todo
+})
+
+export const updateTodo = (todoId, params) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      axios.patch(`http://localhost:3000/api/v1/tasks/${taskId}`, {todo: params})
+      .then(res => {
+        dispatch({
+          type: UPDATE_TODO,
+          todo: res.data
+        })
+        resolve('Your Todo is updated.')
+      })
     })
   }
 }
+
+export const deleteTodo = (todoId) => {
+  return (dispatch) => {
+    axios.delete(`http://localhost:3000/api/v1/tasks/${taskId}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_TODO,
+        todoId
+      })
+    })
+  }
+}
+
+export const cancelEdit = () => ({
+  type: CANCEL_EDIT_TODO
+})
