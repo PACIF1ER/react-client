@@ -6,10 +6,12 @@ class Todos extends Component {
 	
   render (){
     return (
-      <div >
+      <div className="full-page">
+      	<div className="content-lg">
         <TodoInput />
         <TodoListContainer />
       </div>
+     </div>
     )
   }
 }

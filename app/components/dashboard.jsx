@@ -4,34 +4,42 @@ import Todos from '../containers/Todos.js';
 import TextField from 'material-ui/TextField';
 import { logoutUser } from '../actions/index';
 
-function Dashboard() {
-	
+function Dashboard({logoutUser, authenticated}) {
+	function renderHeader(){
+		if (authenticated) {
   return (
+  	
   	<div className="menu">
     <div className="container-fluid">
 		<div className="navbar-header">
-			<a href="#">Bootsnipp</a>
+			<a href="#">Todo App</a>
 		</div>
 		<div>
 			<ul className="nav navbar-nav navbar-right">
-				<li><a href="#" ><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a onClick={() => logoutUser()}><span className="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul>
 		</div>
 	</div>
 </div>
 
-)
+  )
+ }
+}
+
+  return (
+  	<div id='container'>
+  		{renderHeader()}
+  	<Todos />
+  	</div>
+  )	
  
 
 }
-function Todosren(){
- 	return(
-<div>
-<Todos />
-</div>
- 		)
- }
+function mapStateToProps(state) {
+  return {
+    authenticated: state.authenticated
+  }
+}
 
 
-export default Dashboard; Todosren;
+export default connect(mapStateToProps, { logoutUser })(Dashboard);

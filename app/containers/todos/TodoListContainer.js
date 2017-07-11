@@ -78,6 +78,8 @@ class TodoListContainer extends Component {
             onBodyClick={this.props.selectTodo}
             selectingId={this.props.selectingId}
             onAlertSet={this.handleAlertSet}
+            onDelete={this.props.deleteTodo}
+
           />
         </div>
 

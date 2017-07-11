@@ -6,7 +6,6 @@ import '../routes';
 function Layout() {
   return (
     <div>
-      <FlashMessage />
       <UIView/>
     </div>
   )
