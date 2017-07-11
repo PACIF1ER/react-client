@@ -3,9 +3,10 @@ import TodoInput from './todos/TodoInput'
 import TodoListContainer from './todos/TodoListContainer'
 
 class Todos extends Component {
+	
   render (){
     return (
-      <div>
+      <div >
         <TodoInput />
         <TodoListContainer />
       </div>

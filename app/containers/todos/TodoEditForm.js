@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import {getEditingTodo} from '../../selectors'
-import * as todoFormActions from '../../actions/index'
+import * as todoFormActions from '../../actions/todoActions'
 import * as appActions from '../../actions/appActions'
 
 

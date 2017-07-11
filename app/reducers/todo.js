@@ -8,7 +8,7 @@ import {
   EDIT_TODO,
   CANCEL_EDIT_TODO,
   UPDATE_TODO
-} from "../actions/index"
+} from "../actions/todoActions"
 
 // TODO replace to immutable.js
 let initialState = {

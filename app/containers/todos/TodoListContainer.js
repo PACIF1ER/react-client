@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as todoActions from '../../actions/index'
+import * as todoActions from '../../actions/todoActions'
 import * as notificationActions from '../../actions/notificationActions'
 import { getActiveTodos, getCompletedTodos } from '../../selectors'
 
@@ -32,11 +32,10 @@ class TodoListContainer extends Component {
   }
 
   componentDidMount(){
-    const {initialized, fetchTodos, requestNotificationPermission, notify, todos} = this.props
-    if(!initialized){
+    const {authenticated, fetchTodos, requestNotificationPermission, notify, todos} = this.props
+    
       fetchTodos()
-    }
-
+    
     requestNotificationPermission().then(() => {
       const checkNotice = () => {
         notify(todos)
@@ -99,7 +98,6 @@ TodoListContainer.propTypes = propTypes
 
 const mapStateToProps = (state) => ({
   completedTodos: getCompletedTodos(state),
-  initialized: state.todos.initialized,
   isFetching: state.todos.isFetching,
   selectingId: state.todos.selectingId,
   todos: getActiveTodos(state),

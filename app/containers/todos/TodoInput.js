@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {addTodo} from '../../actions/index'
+import {addTodo} from '../../actions/todoActions'
 import TextField from 'material-ui/TextField'
 import AddButton from '../../components/buttons/AddButton'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -21,6 +21,7 @@ class TodoInput extends Component {
     this.handleChangeInput = this.handleChangeInput.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
+
 
   handleChangeInput(e){
     e.preventDefault()
@@ -82,7 +83,8 @@ TodoInput.propTypes = propTypes
 
 const mapStateToProps = state => ({
   isFetching: state.todos.isFetching,
-  isUploading: state.todos.isUploading
+  isUploading: state.todos.isUploading,
+  authenticated: state.authenticated
 })
 
 const mapDispatchToProps = dispatch => ({

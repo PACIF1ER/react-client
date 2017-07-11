@@ -6,16 +6,7 @@ const SET_FLASH_MESSAGE = 'SET_FLASH_MESSAGE';
 const HIDE_FLASH_MESSAGE = 'HIDE_FLASH_MESSAGE';
 const AUTH_ERROR = 'AUTH_ERROR';
 const LOGOUT_USER = 'LOGOUT_USER';
-const FETCH_TODOS = 'FETCH_TODOS';
-const RECEIVE_TODOS = 'RECEIVE_TODOS';
-const ADD_TODO = 'ADD_TODO';
-const ADD_TODO_COMPLETE = 'ADD_TODO_COMPLETE';
-const EDIT_TODO = 'EDIT_TODO';
-const UPDATE_TODO= 'UPDATE_TODO';
-const DELETE_TODO = 'DELETE_TODO';
-const SELECT_TODO = 'SELECT_TODO';
-const SET_ALERT = 'SET_ALERT';
-const CANCEL_EDIT_TODO = 'CANCEL_EDIT_TODO';
+
 
 const ROOT_URL = "http://localhost:3000/api/v1";
 
@@ -84,76 +75,4 @@ export function logoutUser() {
     dispatch(setFlashMessage("Logged out", "success"))
   }
 }
-export function fetchTasks() {
-  return function(dispatch) {
-    const URL = `${ROOT_URL}/tasks`
-    const headers = {
-      Authorization: localStorage.auth_token
-    }
-    axios.get(URL, { headers: headers })
-    .then(response => {
-      dispatch({ type: FETCH_TODOS, payload: response })
-    })
-    .catch(error => {
-      dispatch(setFlashMessage("Error retrieving tasks", "danger"))
-    })
-  }
-}
 
-export const selectTodo = (todoId) => ({
-  type: SELECT_TODO,
-  todoId
-})
-
-export const addTodo = (body) => {
-  return (dispatch) => {
-             const headers = {
-      Authorization: localStorage.auth_token
-}
-    dispatch({type: ADD_TODO})
-    axios.post('http://localhost:3000/api/v1/tasks', { headers}, {todo: {body}})
-    .then(res => {
-      dispatch({
-        type: ADD_TODO_COMPLETE,
-        todo: res.data
-      })
-    })
-  }
-}
-
-//TODO api揃える！！
-export const editTodo = (todo) => ({
-  type: EDIT_TODO,
-  todo
-})
-
-export const updateTodo = (todoId, params) => {
-  return (dispatch) => {
-    return new Promise((resolve, reject) => {
-      axios.patch(`http://localhost:3000/api/v1/tasks/${taskId}`, {todo: params})
-      .then(res => {
-        dispatch({
-          type: UPDATE_TODO,
-          todo: res.data
-        })
-        resolve('Your Todo is updated.')
-      })
-    })
-  }
-}
-
-export const deleteTodo = (todoId) => {
-  return (dispatch) => {
-    axios.delete(`http://localhost:3000/api/v1/tasks/${taskId}`)
-    .then(res => {
-      dispatch({
-        type: DELETE_TODO,
-        todoId
-      })
-    })
-  }
-}
-
-export const cancelEdit = () => ({
-  type: CANCEL_EDIT_TODO
-})
