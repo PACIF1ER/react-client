@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Todos from '../containers/Todos.js';
 import TextField from 'material-ui/TextField';
 import { logoutUser } from '../actions/index';
+import { UISref } from 'ui-router-react';
+
 
 function Dashboard({logoutUser, authenticated}) {
 	function renderHeader(){
@@ -12,7 +14,7 @@ function Dashboard({logoutUser, authenticated}) {
   	<div className="menu">
     <div className="container-fluid">
 		<div className="navbar-header">
-			<a href="#">Todo App</a>
+			<UISref to="main"><a>Todo App</a></UISref>
 		</div>
 		<div>
 			<ul className="nav navbar-nav navbar-right">

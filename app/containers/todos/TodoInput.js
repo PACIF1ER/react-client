@@ -50,7 +50,7 @@ class TodoInput extends Component {
           className='u-flex-full'
           disabled={isFetching || isUploading}
           fullWidth={true}
-          floatingLabelText="Input yout task"
+          floatingLabelText="Input your task"
           name='todo_input'
           onChange={this.handleChangeInput}
           onKeyDown={this.handleKeyDown}
