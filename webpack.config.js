@@ -16,21 +16,34 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
-  module: {
-    loaders: [
-      {
-        test: /\/.js$/|/\.jsx$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'app')
-      },
-      {
-        test: /\.styl$/,
-        loaders: ['style', 'css', 'stylus']
-      }
+  devtool: '#cheap-module-source-map',
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: [/node_modules/],
+                loader: "babel-loader",
+                query: {
+                    presets: ['es2015', 'react', 'stage-0', 'stage-1']
+                }
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+            },
+            {
+                test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
+                loader: 'file-loader'
+            }
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin('styles.css', {
+            allChunks: true
+        })
     ]
-  },
-  stylus: {
-    use: [require('nib')()],
-    import: ['~nib/lib/nib/index.styl']
-  }
 }
