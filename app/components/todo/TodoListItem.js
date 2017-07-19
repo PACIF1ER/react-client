@@ -36,7 +36,6 @@ class TodoListItem extends Component {
 
     return(
       <div
-        className={`c-todos-list-body ${bodyClassName}`}
         onClick={clickHandler}
         >
         {todo.completed ? <strike>{todo.body}</strike> : <span>{todo.body}</span>}

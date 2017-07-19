@@ -74,7 +74,7 @@ class TimeSelector extends Component {
         onRequestClose={onRequestClose}
         >
 
-        <div className="row collapse">
+        <div className="row ">
           <div className="columns small-12 medium-6 text-center">
             <span className="stat">
               {this.getDateString()}
