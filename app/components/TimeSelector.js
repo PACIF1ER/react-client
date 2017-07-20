@@ -74,11 +74,9 @@ class TimeSelector extends Component {
         onRequestClose={onRequestClose}
         >
 
-        <div className="row ">
+        <div className="row">
           <div className="columns small-12 medium-6 text-center">
-            <span className="stat">
               {this.getDateString()}
-            </span>
 
             <IconButton
               onClick={() => this.refs.datePicker.openDialog()}
@@ -88,9 +86,7 @@ class TimeSelector extends Component {
           </div>
 
           <div className="columns small-12 medium-6 text-center">
-            <span className="stat">
               {this.getTimeString()}
-            </span>
 
             <IconButton
               onClick={() => this.refs.timePicker.openDialog()}
