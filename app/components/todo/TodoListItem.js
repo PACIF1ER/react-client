@@ -36,6 +36,7 @@ class TodoListItem extends Component {
 
     return(
       <div
+        className={`c-todos-list-body ${bodyClassName}`}
         onClick={clickHandler}
         >
         {todo.completed ? <strike>{todo.body}</strike> : <span>{todo.body}</span>}
@@ -50,7 +51,8 @@ class TodoListItem extends Component {
       <li>
         <div className='c-todos-list-item'>
           {this.renderBody()}
-          {!todo.completed ? <CheckButton onClick={() => onComplete(todo) }  />  : null}
+          {!todo.completed ? <CheckButton onClick={() => onComplete(todo) }  />   : null}
+          {!todo.completed ? <DeleteButton onClick={() => onDelete(todo.id)}  />   : null}
           {todo.completed ? <DeleteButton onClick={() => onDelete(todo.id)} /> : null}
         </div>
         <TodoEditPanel

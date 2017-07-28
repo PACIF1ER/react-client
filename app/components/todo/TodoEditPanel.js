@@ -33,7 +33,9 @@ class TodoEditPanel extends Component {
 
     return (
       <ReactCSSTransitionGroup
-        
+        transitionName='from-top'
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
         >
         {open &&
           <div style={panelStyle} className="u-flex-container u-flex-center">
