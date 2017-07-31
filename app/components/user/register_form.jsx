@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { emailInput, passwordInput, passwordConfirmationInput, firstNameInput, lastNameInput } from './form_inputs/index.jsx';
+import { emailInput, passwordInput, passwordConfirmationInput, firstNameInput, lastNameInput } from './../form_inputs/index.jsx';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { registerUser } from '../actions/index';
+import { registerUser } from '../../actions/index';
 import { UISref } from 'ui-router-react';
 
 function RegisterForm({handleSubmit, registerUser}) {

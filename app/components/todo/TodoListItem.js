@@ -51,7 +51,7 @@ class TodoListItem extends Component {
       <li>
         <div className='c-todos-list-item'>
           {this.renderBody()}
-          {!todo.completed ? <CheckButton onClick={() => onComplete(todo) }  />   : null}
+          {!todo.completed ? <CheckButton onClick={() => onComplete(todo)  }  />   : null}
           {!todo.completed ? <DeleteButton onClick={() => onDelete(todo.id)}  />   : null}
           {todo.completed ? <DeleteButton onClick={() => onDelete(todo.id)} /> : null}
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { loginUser } from '../actions/index';
-import { emailInput, passwordInput } from './form_inputs/index.jsx';
+import { loginUser } from '../../actions/index';
+import { emailInput, passwordInput } from './../form_inputs/index.jsx';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
