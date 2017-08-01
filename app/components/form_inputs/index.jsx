@@ -27,7 +27,7 @@ export function passwordInput(password) {
 export function passwordConfirmationInput(password_confirmation) {
   return (
     <div className={`form-group ${password_confirmation.meta.touched && password_confirmation.meta.invalid ? 'text-danger' : ''}`}>
-      <label> Password </label>
+      <label> Confirm Password </label>
       <input type="password" {...password_confirmation.input} className="form-control" placeholder="Password Confirmation"/>
       <div className="text-helper">
         {password_confirmation.meta.touched ? password_confirmation.meta.error : ''}

@@ -55,7 +55,7 @@ class TodoEditPanel extends Component {
 
             {todo.alert_at &&
               <div className="u-flex-container u-flex-center">
-                <span>{moment(todo.alert_at).format('HH:mm')}</span>
+                <span>{moment(todo.alert_at).format('YYYY-MM-DD')}</span>
                 <DeleteButton
                   onClick={() => onAlertSet(todo.id, '')}
                 />

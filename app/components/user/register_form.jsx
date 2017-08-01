@@ -11,6 +11,20 @@ function RegisterForm({handleSubmit, registerUser}) {
   }
 
   return (
+   <div> 
+    <div className="menu">
+        <div className="container-fluid">
+        <div className="navbar-header">
+      <a href="#">Todo App</a>
+    </div>
+    <div>
+      <ul className="nav navbar-nav navbar-right">
+        <li> <UISref to="login"><a ><span className="glyphicon glyphicon-log-in"></span> Login</a></UISref></li>
+
+      </ul>
+    </div>
+  </div>
+</div>
     <div className="full-page">
       <div className="content">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,6 +41,7 @@ function RegisterForm({handleSubmit, registerUser}) {
         </form>
       </div>
     </div>
+   </div> 
   )
 }
 
